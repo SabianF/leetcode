@@ -46,7 +46,7 @@ function maxCollectedFruits(fruits) {
 
 /**
  *
- * @param {Number} moves_remaining
+ * @param {Number[][]} fruits
  * @param {Number[]} child_1_pos
  * @param {Number[]} child_1_fruit_collected
  * @param {Number[]} child_2_pos
@@ -55,7 +55,7 @@ function maxCollectedFruits(fruits) {
  * @param {Number[]} child_3_fruit_collected
  */
 function moveChildren(
-  moves_remaining,
+  fruits,
   child_1_pos,
   child_1_fruit_collected,
   child_2_pos,
@@ -63,16 +63,16 @@ function moveChildren(
   child_3_pos,
   child_3_fruit_collected,
 ) {
-  moveChild1(child_1_pos, child_1_fruit_collected);
-  moveChild2(child_2_pos, child_2_fruit_collected);
-  moveChild3(child_3_pos, child_3_fruit_collected);
+  moveChild1(child_1_pos, child_1_fruit_collected, fruits);
+  moveChild2(child_2_pos, child_2_fruit_collected, fruits);
+  moveChild3(child_3_pos, child_3_fruit_collected, fruits);
 }
 
 /**
  *
- * @param child_1_pos
- * @param child_1_fruit_collected
- * @param fruits
+ * @param {Position} child_1_pos
+ * @param {Number[]} child_1_fruit_collected
+ * @param {Number[][]} fruits
  */
 function moveChild1(
   child_1_pos,
@@ -80,15 +80,21 @@ function moveChild1(
   fruits,
 ) {
 
+  // TODO: look ahead at possible paths
+  // TODO: check largest value path
+  // TODO: move to largest value path location
+  // TODO: collect fruit at location
+  // TODO: mark the fruit here as collected
 }
 
 /**
  * @param {Number[]} child_2_pos
+ * @param {Number[]} child_2_fruit_collected
  * @param {Number[][]} fruits
  */
 function moveChild2(
   child_2_pos,
-  child_1_fruit_collected,
+  child_2_fruit_collected,
   fruits,
 ) {
 
@@ -96,11 +102,12 @@ function moveChild2(
 
 /**
  * @param {Number[]} child_3_pos
+ * @param {Number[]} child_3_fruit_collected
  * @param {Number[][]} fruits
  */
 function moveChild3(
   child_3_pos,
-  child_1_fruit_collected,
+  child_3_fruit_collected,
   fruits,
 ) {
 
