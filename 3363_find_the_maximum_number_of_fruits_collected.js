@@ -144,62 +144,33 @@ function moveChildren(
 
 /**
  *
- * @param {DungeonPosition} child_1_pos
+ * @param {DungeonPosition} current_position
  * @param {Number[][]} fruits
  */
 function moveChild1(
-  child_1_pos,
+  current_position,
   fruits,
 ) {
-  /** @type {DungeonPosition[]} */
   const paths = [
     {
-      x: child_1_pos.x + 1,
-      y: child_1_pos.y,
+      x: current_position.x + 1,
+      y: current_position.y,
     },
     {
-      x: child_1_pos.x + 1,
-      y: child_1_pos.y + 1,
+      x: current_position.x + 1,
+      y: current_position.y + 1,
     },
     {
-      x: child_1_pos.x,
-      y: child_1_pos.y + 1,
+      x: current_position.x,
+      y: current_position.y + 1,
     },
   ];
 
-  /** @type {DungeonLocation} */
-  const path_with_most_fruits = {
-    position: {
-      x: 0,
-      y: 0,
-    },
-    num_fruits: 0,
-  };
-  for (const path of paths) {
-    if (path.x > fruits.length - 1) {
-      continue;
-    }
-
-    if (path.y > fruits[path.x].length - 1) {
-      continue;
-    }
-
-    const num_fruits_at_location = fruits[path.y][path.x];
-    if (num_fruits_at_location > path_with_most_fruits.num_fruits) {
-      path_with_most_fruits.position = path;
-      path_with_most_fruits.num_fruits = num_fruits_at_location;
-      child_1_pos.x = path.x;
-      child_1_pos.y = path.y;
-    };
-  }
-
-  return path_with_most_fruits;
-
-  // TODO: look ahead at possible paths
-  // TODO: check largest value path
-  // TODO: move to largest value path location
-  // TODO: collect fruit at location
-  // TODO: mark the fruit here as collected
+  return moveChild(
+    current_position,
+    paths,
+    fruits,
+  );
 }
 
 /**
@@ -226,6 +197,46 @@ function moveChild3(
   fruits,
 ) {
   console.log("Child 3 not implemented");
+}
+
+/**
+ *
+ * @param {DungeonPosition} child_pos
+ * @param {DungeonPosition[]} paths
+ * @param {Number[][]} fruits
+ */
+function moveChild(
+  child_pos,
+  paths,
+  fruits,
+) {
+  /** @type {DungeonLocation} */
+  const path_with_most_fruits = {
+    position: {
+      x: 0,
+      y: 0,
+    },
+    num_fruits: 0,
+  };
+  for (const path of paths) {
+    if (path.x > fruits.length - 1) {
+      continue;
+    }
+
+    if (path.y > fruits[path.x].length - 1) {
+      continue;
+    }
+
+    const num_fruits_at_location = fruits[path.y][path.x];
+    if (num_fruits_at_location > path_with_most_fruits.num_fruits) {
+      path_with_most_fruits.position = path;
+      path_with_most_fruits.num_fruits = num_fruits_at_location;
+      child_pos.x = path.x;
+      child_pos.y = path.y;
+    };
+  }
+
+  return path_with_most_fruits;
 }
 
 // Should be 100
