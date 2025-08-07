@@ -136,8 +136,11 @@ function moveChildren(
   const child_1_path_with_most_fruits = moveChild1(child_1_pos, fruits);
   child_1_fruit_collected.push(child_1_path_with_most_fruits.num_fruits);
 
-  moveChild2(child_2_pos, child_2_fruit_collected, fruits);
-  moveChild3(child_3_pos, child_3_fruit_collected, fruits);
+  const child_2_path_with_most_fruits = moveChild2(child_2_pos, fruits);
+  child_2_fruit_collected.push(child_2_path_with_most_fruits.num_fruits);
+
+  const child_3_path_with_most_fruits = moveChild3(child_3_pos, fruits);
+  child_3_fruit_collected.push(child_3_path_with_most_fruits.num_fruits);
 
   console.log("child_1_path_with_most_fruits:", child_1_path_with_most_fruits);
 }
@@ -174,29 +177,51 @@ function moveChild1(
 }
 
 /**
- * @param {Number[]} child_2_pos
- * @param {Number[]} child_2_fruit_collected
+ * @param {Number[]} current_position
  * @param {Number[][]} fruits
  */
 function moveChild2(
-  child_2_pos,
-  child_2_fruit_collected,
+  current_position,
   fruits,
 ) {
-  console.log("Child 2 not implemented");
+  const paths = [
+    {
+      x: current_position.x - 1,
+      y: current_position.y + 1,
+    },
+    {
+      x: current_position.x,
+      y: current_position.y + 1,
+    },
+    {
+      x: current_position.x + 1,
+      y: current_position.y + 1,
+    },
+  ];
+
+  return moveChild(
+    current_position,
+    paths,
+    fruits,
+  );
 }
 
 /**
- * @param {Number[]} child_3_pos
- * @param {Number[]} child_3_fruit_collected
+ * @param {Number[]} current_position
  * @param {Number[][]} fruits
  */
 function moveChild3(
-  child_3_pos,
-  child_3_fruit_collected,
+  current_position,
   fruits,
 ) {
   console.log("Child 3 not implemented");
+  const paths = [];
+
+  return moveChild(
+    current_position,
+    paths,
+    fruits,
+  );
 }
 
 /**
@@ -219,11 +244,11 @@ function moveChild(
     num_fruits: 0,
   };
   for (const path of paths) {
-    if (path.x > fruits.length - 1) {
+    if (path.y > fruits.length - 1) {
       continue;
     }
 
-    if (path.y > fruits[path.x].length - 1) {
+    if (path.x > fruits[0].length - 1) {
       continue;
     }
 
