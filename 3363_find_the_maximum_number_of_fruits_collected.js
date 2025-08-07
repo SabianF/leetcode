@@ -214,8 +214,20 @@ function moveChild3(
   current_position,
   fruits,
 ) {
-  console.log("Child 3 not implemented");
-  const paths = [];
+  const paths = [
+    {
+      x: current_position.x + 1,
+      y: current_position.y - 1,
+    },
+    {
+      x: current_position.x + 1,
+      y: current_position.y,
+    },
+    {
+      x: current_position.x + 1,
+      y: current_position.y + 1,
+    },
+  ];
 
   return moveChild(
     current_position,
