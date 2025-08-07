@@ -74,6 +74,17 @@ function maxCollectedFruits(fruits) {
   } while (moves_remaining > 0);
 
   console.log("child_1_fruit_collected:", child_1_fruit_collected);
+  console.log("child_2_fruit_collected:", child_2_fruit_collected);
+  console.log("child_3_fruit_collected:", child_3_fruit_collected);
+
+  let total_fruit_collected = []
+  total_fruit_collected.push(child_1_fruit_collected, child_2_fruit_collected, child_3_fruit_collected);
+  total_fruit_collected = total_fruit_collected.flat();
+  let total_fruit_collected_sum = 0;
+  for (const fruit_collected of total_fruit_collected) {
+    total_fruit_collected_sum += fruit_collected;
+  }
+  console.log("Total fruit collected", total_fruit_collected, "=", total_fruit_collected_sum);
 }
 
 /**
@@ -219,8 +230,8 @@ function moveChild3(
 
 // Should be 100
 maxCollectedFruits([
-  [1 , 2 , 3 , 4 ],
-  [5 , 6 , 8 , 7 ],
-  [9 , 10, 11, 12],
+  [1, 2, 3, 4],
+  [5, 6, 8, 7],
+  [9, 10, 11, 12],
   [13, 14, 15, 16],
 ]);
