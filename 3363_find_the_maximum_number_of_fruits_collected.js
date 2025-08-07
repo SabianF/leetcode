@@ -1,12 +1,12 @@
 /**
- * @typedef Position
+ * @typedef DungeonPosition
  * @property {Number} x
  * @property {Number} y
  */
 
 /**
  * @typedef DungeonLocation
- * @property {Position} position
+ * @property {DungeonPosition} position
  * @property {Number} num_fruits
  */
 
@@ -23,7 +23,7 @@ function maxCollectedFruits(fruits) {
     throw new Error("Invalid dungeon size. Must be 2 <= x <= 1000");
   }
 
-  /** @type {Position} */
+  /** @type {DungeonPosition} */
   let child_1_pos = {
     x: 0,
     y: 0,
@@ -31,7 +31,7 @@ function maxCollectedFruits(fruits) {
   /** @type {Number[]} */
   let child_1_fruit_collected = [];
 
-  /** @type {Position} */
+  /** @type {DungeonPosition} */
   let child_2_pos = {
     x: dungeon_width,
     y: 0,
@@ -39,7 +39,7 @@ function maxCollectedFruits(fruits) {
   /** @type {Number[]} */
   let child_2_fruit_collected = [];
 
-  /** @type {Position} */
+  /** @type {DungeonPosition} */
   let child_3_pos = {
     x: 0,
     y: dungeon_height,
@@ -133,14 +133,14 @@ function moveChildren(
 
 /**
  *
- * @param {Position} child_1_pos
+ * @param {DungeonPosition} child_1_pos
  * @param {Number[][]} fruits
  */
 function moveChild1(
   child_1_pos,
   fruits,
 ) {
-  /** @type {Position[]} */
+  /** @type {DungeonPosition[]} */
   const paths = [
     {
       x: child_1_pos.x + 1,
