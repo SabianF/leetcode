@@ -38,9 +38,9 @@ In total they collect 1 + 6 + 11 + 16 + 4 + 8 + 12 + 13 + 14 + 15 = 100 fruits.
 
 # Example 2:
 
-Input: fruits = [[1,1],[1,1]]
+Input: `fruits = [[1,1],[1,1]]`
 
-Output: 4
+Output: `4`
 
 ## Explanation:
 

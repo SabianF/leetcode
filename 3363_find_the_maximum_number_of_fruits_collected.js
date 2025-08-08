@@ -14,7 +14,7 @@
  * @param {Number[][]} fruits
  * @return {Number}
  */
-function maxCollectedFruits(fruits) {
+export default function maxCollectedFruits(fruits) {
   const dungeon_width = fruits.length - 1;
   const dungeon_height = fruits[0].length - 1;
   const max_moves = dungeon_width + 1;
