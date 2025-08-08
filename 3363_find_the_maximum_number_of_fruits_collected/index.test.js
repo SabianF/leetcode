@@ -1,7 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 
-import maxCollectedFruits from "./3363_find_the_maximum_number_of_fruits_collected.js";
+import maxCollectedFruits from "./index.js";
 
 describe(`3363 Find the maximum number of fruits collected`, () => {
   describe(`${maxCollectedFruits.name}`, () => {
