@@ -47,8 +47,10 @@ function maxCollectedFruits(fruits) {
   /** @type {Number[]} */
   let child_3_fruit_collected = [];
 
+  let collected_positions = [];
   collectStartingPositionFruits(
     fruits,
+    collected_positions,
     child_1_pos,
     child_1_fruit_collected,
     child_2_pos,
@@ -61,6 +63,7 @@ function maxCollectedFruits(fruits) {
   do {
     moveChildren(
       fruits,
+      collected_positions,
       child_1_pos,
       child_1_fruit_collected,
       child_2_pos,
@@ -90,6 +93,7 @@ function maxCollectedFruits(fruits) {
 /**
  *
  * @param {Number[][]} fruits
+ * @param {DungeonPosition[]} collected_positions
  * @param {Number[]} child_1_pos
  * @param {Number[]} child_1_fruit_collected
  * @param {Number[]} child_2_pos
@@ -99,6 +103,7 @@ function maxCollectedFruits(fruits) {
  */
 function collectStartingPositionFruits(
   fruits,
+  collected_positions,
   child_1_pos,
   child_1_fruit_collected,
   child_2_pos,
@@ -112,11 +117,18 @@ function collectStartingPositionFruits(
   child_2_fruit_collected.push(child_2_position_fruits);
   const child_3_position_fruits = fruits[child_3_pos.y][child_3_pos.x];
   child_3_fruit_collected.push(child_3_position_fruits);
+
+  collected_positions.push(
+    structuredClone(child_1_pos),
+    structuredClone(child_2_pos),
+    structuredClone(child_3_pos),
+  );
 }
 
 /**
  *
  * @param {Number[][]} fruits
+ * @param {DungeonPosition[]} collected_positions
  * @param {Number[]} child_1_pos
  * @param {Number[]} child_1_fruit_collected
  * @param {Number[]} child_2_pos
@@ -126,6 +138,7 @@ function collectStartingPositionFruits(
  */
 function moveChildren(
   fruits,
+  collected_positions,
   child_1_pos,
   child_1_fruit_collected,
   child_2_pos,
@@ -134,15 +147,68 @@ function moveChildren(
   child_3_fruit_collected,
 ) {
   const child_1_path_with_most_fruits = moveChild1(child_1_pos, fruits);
-  child_1_fruit_collected.push(child_1_path_with_most_fruits.num_fruits);
-
   const child_2_path_with_most_fruits = moveChild2(child_2_pos, fruits);
-  child_2_fruit_collected.push(child_2_path_with_most_fruits.num_fruits);
-
   const child_3_path_with_most_fruits = moveChild3(child_3_pos, fruits);
-  child_3_fruit_collected.push(child_3_path_with_most_fruits.num_fruits);
 
-  console.log("child_1_path_with_most_fruits:", child_1_path_with_most_fruits);
+  let child_1_path_already_collected = false;
+  let child_2_path_already_collected = false;
+  let child_3_path_already_collected = false;
+  for (const collected_position of structuredClone(collected_positions)) {
+    const x = collected_position.x;
+    const y = collected_position.y;
+
+    if (
+      child_1_path_with_most_fruits.position.x === x &&
+      child_1_path_with_most_fruits.position.y === y
+    ) {
+      child_1_path_already_collected = true;
+    }
+
+    if (
+      (
+        child_2_path_with_most_fruits.position.x === x &&
+        child_2_path_with_most_fruits.position.y === y
+      ) ||
+      (
+        child_2_path_with_most_fruits.position.x === child_1_path_with_most_fruits.position.x &&
+        child_2_path_with_most_fruits.position.y === child_1_path_with_most_fruits.position.y
+      )
+    ) {
+      child_2_path_already_collected = true;
+    }
+
+    if (
+      (
+        child_3_path_with_most_fruits.position.x === x &&
+        child_3_path_with_most_fruits.position.y === y
+      ) ||
+      (
+        child_3_path_with_most_fruits.position.x === child_1_path_with_most_fruits.position.x &&
+        child_3_path_with_most_fruits.position.y === child_1_path_with_most_fruits.position.y
+      ) ||
+      (
+        child_3_path_with_most_fruits.position.x === child_2_path_with_most_fruits.position.x &&
+        child_3_path_with_most_fruits.position.y === child_2_path_with_most_fruits.position.y
+      )
+    ) {
+      child_3_path_already_collected = true;
+    }
+  }
+
+  if (!child_1_path_already_collected) {
+    child_1_fruit_collected.push(child_1_path_with_most_fruits.num_fruits);
+    collected_positions.push(child_1_path_with_most_fruits.position);
+  }
+
+  if (!child_2_path_already_collected) {
+    child_2_fruit_collected.push(child_2_path_with_most_fruits.num_fruits);
+    collected_positions.push(child_2_path_with_most_fruits.position);
+  }
+
+  if (!child_3_path_already_collected) {
+    child_3_fruit_collected.push(child_3_path_with_most_fruits.num_fruits);
+    collected_positions.push(child_3_path_with_most_fruits.position);
+  }
 }
 
 /**
