@@ -47,6 +47,11 @@ export default function maxCollectedFruits(fruits) {
   /** @type {Number[]} */
   let child_3_fruit_collected = [];
 
+  console.log("========== Start ==========");
+  console.log("Dungeon:");
+  console.log(fruits);
+
+  /** @type {DungeonPosition[]} */
   let collected_positions = [];
   collectStartingPositionFruits(
     fruits,
@@ -76,9 +81,13 @@ export default function maxCollectedFruits(fruits) {
 
   } while (moves_remaining > 0);
 
-  console.log("child_1_fruit_collected:", child_1_fruit_collected);
-  console.log("child_2_fruit_collected:", child_2_fruit_collected);
-  console.log("child_3_fruit_collected:", child_3_fruit_collected);
+  console.log("Locations collected:");
+  console.log(collected_positions);
+
+  console.log("fruit_collected:");
+  console.log("child_1:", child_1_fruit_collected);
+  console.log("child_2:", child_2_fruit_collected);
+  console.log("child_3:", child_3_fruit_collected);
 
   let total_fruit_collected = []
   total_fruit_collected.push(child_1_fruit_collected, child_2_fruit_collected, child_3_fruit_collected);

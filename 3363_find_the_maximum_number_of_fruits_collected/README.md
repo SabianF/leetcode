@@ -56,3 +56,7 @@ In total they collect 1 + 1 + 1 + 1 = 4 fruits.
 2 <= n == fruits.length == fruits[i].length <= 1000
 
 0 <= fruits[i][j] <= 1000
+
+# Resources used
+
+- https://www.freecodecamp.org/news/dijkstras-shortest-path-algorithm-visual-introduction/
