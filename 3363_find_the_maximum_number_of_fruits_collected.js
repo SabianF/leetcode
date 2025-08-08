@@ -17,7 +17,7 @@
 function maxCollectedFruits(fruits) {
   const dungeon_width = fruits.length - 1;
   const dungeon_height = fruits[0].length - 1;
-  const max_moves = dungeon_width;
+  const max_moves = dungeon_width + 1;
 
   if (max_moves < 2 || max_moves > 1000) {
     throw new Error("Invalid dungeon size. Must be 2 <= x <= 1000");
@@ -88,6 +88,7 @@ function maxCollectedFruits(fruits) {
     total_fruit_collected_sum += fruit_collected;
   }
   console.log("Total fruit collected", total_fruit_collected, "=", total_fruit_collected_sum);
+  return total_fruit_collected_sum;
 }
 
 /**
@@ -348,4 +349,9 @@ maxCollectedFruits([
   [5, 6, 8, 7],
   [9, 10, 11, 12],
   [13, 14, 15, 16],
+]);
+
+maxCollectedFruits([
+  [1, 1],
+  [1, 1],
 ]);
