@@ -56,3 +56,12 @@ In total they collect 1 + 1 + 1 + 1 = 4 fruits.
 2 <= n == fruits.length == fruits[i].length <= 1000
 
 0 <= fruits[i][j] <= 1000
+
+---
+
+# My simplification of the challenge
+
+- You have a square grid whose squares (nodes) have number values
+- You have 3 starting points in the top-left, bottom-left, and top-right of the grid
+- From each starting point, find the most-valuable path, ensuring no paths intersect
+- Sum together all the values at every node in the paths
