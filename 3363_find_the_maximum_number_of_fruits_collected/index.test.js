@@ -43,6 +43,17 @@ describe(`3363 Find the maximum number of fruits collected`, () => {
           ],
           expected: 145,
         },
+        {
+          input: [
+            [ 4, 18, 19,  9, 20, 14],
+            [16,  4,  4, 16, 15, 16],
+            [ 2, 11, 15,  6,  8,  9],
+            [ 6,  7, 11, 17,  7,  6],
+            [17, 17,  2, 13,  2, 14],
+            [16,  9,  6, 14,  7, 16],
+          ],
+          expected: 182,
+        },
       ];
 
       for (const test_case of test_cases) {

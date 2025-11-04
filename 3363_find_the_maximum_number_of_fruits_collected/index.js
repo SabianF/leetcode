@@ -76,9 +76,6 @@ export default function maxCollectedFruits(dungeon) {
     }
   }
 
-  console.log("dungeon:", dungeon.map((column) => column.map((cell) => cell.toString().padStart(4, " "))));
-  console.log("fruits_collected:", fruits_collected);
-
   let sum_fruits_collected = 0;
   for (const location of fruits_collected) {
     sum_fruits_collected += location.num_fruits;
