@@ -20,9 +20,9 @@
  * @return {Number}
  */
 export default function maxCollectedFruits(dungeon) {
+  const max_moves = dungeon.length;
   const dungeon_width = dungeon.length - 1;
   const dungeon_height = dungeon[0].length - 1;
-  const max_moves = dungeon_width + 1;
 
   if (max_moves < 2 || max_moves > 1000) {
     throw new Error("Invalid dungeon size. Must be 2 <= x <= 1000");
@@ -76,7 +76,7 @@ export default function maxCollectedFruits(dungeon) {
     }
   }
 
-  console.log("dungeon:", dungeon);
+  console.log("dungeon:", dungeon.map((column) => column.map((cell) => cell.toString().padStart(4, " "))));
   console.log("fruits_collected:", fruits_collected);
 
   let sum_fruits_collected = 0;
@@ -154,11 +154,51 @@ function moveChild({
     if (next_position.y > dungeon_height) {
       continue;
     }
-    if (
-      child.position.x !== child.position.y &&
-      next_position.x === next_position.y
-    ) {
-      continue;
+    const is_center_child = child.position.x === child.position.y;
+    if (is_center_child === false) {
+
+      const will_hit_center_diagonal = next_position.x === next_position.y;
+      if (will_hit_center_diagonal) {
+        continue;
+      }
+
+      // TODO
+      let will_cross_center_diagonal = false;
+      for (let i = 0; i < dungeon_width; i++) {
+        /**
+         * @type {DungeonPosition}
+         */
+        const diagonal_point = {
+          x: i,
+          y: i,
+        };
+
+        const started_left = (
+          child.position.x < diagonal_point.x ||
+          child.position.y > diagonal_point.y
+        );
+        const will_cross_right = started_left && (
+          next_position.x >= diagonal_point.x &&
+          next_position.y <= diagonal_point.y
+        );
+
+        const started_right = (
+          child.position.x > diagonal_point.x ||
+          child.position.y < diagonal_point.y
+        );
+        const will_cross_left = started_right && (
+          next_position.x <= diagonal_point.x &&
+          next_position.y >= diagonal_point.y
+        );
+
+        if (will_cross_right || will_cross_left) {
+          will_cross_center_diagonal = true;
+          break;
+        }
+      }
+      if (will_cross_center_diagonal) {
+        continue;
+      }
     }
 
     const next_position_num_fruits = dungeon[next_position.y][next_position.x];
