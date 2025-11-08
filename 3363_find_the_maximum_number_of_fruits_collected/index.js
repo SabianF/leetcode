@@ -20,6 +20,10 @@
  * @return {Number}
  */
 export default function maxCollectedFruits(dungeon) {
+
+  // TODO: Children are only looking for NEXT largest position, instead of finding the largest PATH throughout all possible paths
+    // I'll need to create an algorithm to crawl and evaluate all possible paths and settle on the largest one
+
   const max_moves = dungeon.length;
   const dungeon_width = dungeon.length - 1;
   const dungeon_height = dungeon[0].length - 1;
@@ -159,7 +163,6 @@ function moveChild({
         continue;
       }
 
-      // TODO
       const will_cross_center_diagonal = (
         (
           child.position.x < child.position.y &&
