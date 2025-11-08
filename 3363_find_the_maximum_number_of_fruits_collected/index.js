@@ -160,39 +160,16 @@ function moveChild({
       }
 
       // TODO
-      let will_cross_center_diagonal = false;
-      for (let i = 0; i < dungeon_width; i++) {
-        /**
-         * @type {DungeonPosition}
-         */
-        const diagonal_point = {
-          x: i,
-          y: i,
-        };
-
-        const started_left = (
-          child.position.x < diagonal_point.x ||
-          child.position.y > diagonal_point.y
-        );
-        const will_cross_right = started_left && (
-          next_position.x >= diagonal_point.x &&
-          next_position.y <= diagonal_point.y
-        );
-
-        const started_right = (
-          child.position.x > diagonal_point.x ||
-          child.position.y < diagonal_point.y
-        );
-        const will_cross_left = started_right && (
-          next_position.x <= diagonal_point.x &&
-          next_position.y >= diagonal_point.y
-        );
-
-        if (will_cross_right || will_cross_left) {
-          will_cross_center_diagonal = true;
-          break;
-        }
-      }
+      const will_cross_center_diagonal = (
+        (
+          child.position.x < child.position.y &&
+          next_position.x > next_position.y
+        ) ||
+        (
+          child.position.y < child.position.x &&
+          next_position.y > next_position.x
+        )
+      );
       if (will_cross_center_diagonal) {
         continue;
       }
